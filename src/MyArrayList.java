@@ -139,6 +139,15 @@ public class MyArrayList<E> {
 
     @Override
     public String toString() {
-        return Arrays.toString(elements);
+        if (size == 0) {
+            return "[]";
+        } else {
+            StringBuilder builder = new StringBuilder("[");
+            for (int i = 0; i < size - 1; i++) {
+                builder.append(elements[i]).append(", ");
+            }
+            builder.append(elements[size - 1]).append("]");
+            return builder.toString();
+        }
     }
 }
