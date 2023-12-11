@@ -79,12 +79,14 @@ public class MyArrayList<E> {
         }
     }
 
-    public boolean addAll(Collection<? extends E> collection) {
-        return true;
+    public void addAll(Collection<? extends E> collection) {
+        addAll(size, collection);
     }
 
-    public boolean addAll(int index, Collection<? extends E> collection) {
-        return true;
+    public void addAll(int index, Collection<? extends E> collection) {
+        for (E item : collection) {
+            add(index++, item);
+        }
     }
 
     public int size() {
