@@ -1,9 +1,11 @@
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class MyArrayList<E> {
     private static final int DEFAULT_CAPACITY = 10;
-    private Object[] elements;
+    private static Object[] elements;
     private int size;
 
     public MyArrayList() {
@@ -49,6 +51,14 @@ public class MyArrayList<E> {
         add(size, element);
     }
 
+    public void set(int index, E element) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", size: " + size);
+        }
+
+        elements[index] = element;
+    }
+
     @SuppressWarnings("unchecked")
     public E get(int index) {
         if (index < 0 || index > size) {
@@ -89,6 +99,40 @@ public class MyArrayList<E> {
         }
     }
 
+    public static <T extends Comparable<? super T>> void bubbleSortForMyArrayList(MyArrayList<T> list) {
+        boolean swapped;
+
+        do {
+            swapped = false;
+            for (int i = 0; i < list.size() - 1; i++) {
+                if (list.get(i).compareTo(list.get(i + 1)) > 0) {
+                    swap(i, i + 1);
+                    swapped = true;
+                }
+            }
+        } while (swapped);
+    }
+
+    private static void swap(int i, int j) {
+        Object temp = elements[i];
+        elements[i] = elements[j];
+        elements[j] = temp;
+    }
+
+    public static <E extends Comparable<? super E>> void bubbleSortForAnotherListTypes(List<E> list) {
+        boolean swapped;
+
+        do {
+            swapped = false;
+            for (int i = 0; i < list.size() - 1; i++) {
+                if (list.get(i).compareTo(list.get(i + 1)) > 0) {
+                    Collections.swap(list, i, i + 1);
+                    swapped = true;
+                }
+            }
+        } while (swapped);
+    }
+
     public int size() {
         return size;
     }
@@ -98,4 +142,3 @@ public class MyArrayList<E> {
         return Arrays.toString(elements);
     }
 }
-// add, get, remove, addAll
