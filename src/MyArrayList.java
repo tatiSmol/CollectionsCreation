@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Collection;
 
 public class MyArrayList<E> {
@@ -28,10 +29,24 @@ public class MyArrayList<E> {
     }
 
     public void add(int index, E element) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", size: " + size);
+        }
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 2);
+        }
 
+        Object[] temp = elements;
+        elements = new Object[temp.length];
+        System.arraycopy(temp, 0, elements, 0, index);
+        int elementsAmountAfterIndex = temp.length - index - 1;
+        System.arraycopy(temp, index + 1, elements, index, elementsAmountAfterIndex);
+        elements[index] = element;
+        size++;
     }
 
     public boolean add(E element) {
+        add(size, element);
         return true;
     }
 
@@ -53,6 +68,15 @@ public class MyArrayList<E> {
 
     public boolean addAll(int index, Collection<? extends E> collection) {
         return true;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(elements);
     }
 }
 // add, get, remove, addAll
