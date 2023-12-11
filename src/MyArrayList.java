@@ -39,9 +39,9 @@ public class MyArrayList<E> {
         Object[] temp = elements;
         elements = new Object[temp.length];
         System.arraycopy(temp, 0, elements, 0, index);
-        int elementsAmountAfterIndex = temp.length - index - 1;
-        System.arraycopy(temp, index + 1, elements, index, elementsAmountAfterIndex);
         elements[index] = element;
+        int elementsAmountAfterIndex = temp.length - index - 1;
+        System.arraycopy(temp, index, elements, index + 1, elementsAmountAfterIndex);
         size++;
     }
 
