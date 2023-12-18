@@ -31,7 +31,7 @@ public class MyArrayList<E> {
     }
 
     public void add(int index, E element) {
-        checkIndex(index);
+        validateIndexBounds(index);
         if (size == elements.length) {
             elements = Arrays.copyOf(elements, (elements.length + 1) * 2);
         }
@@ -46,7 +46,7 @@ public class MyArrayList<E> {
     }
 
     public void set(int index, E element) {
-        checkIndex(index);
+        validateIndexBounds(index);
 
         elements[index] = element;
     }
@@ -120,12 +120,6 @@ public class MyArrayList<E> {
                 }
             }
         } while (swapped);
-    }
-
-    private void checkIndex(int index) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", size: " + size);
-        }
     }
 
     private void validateIndexBounds(int index) {
